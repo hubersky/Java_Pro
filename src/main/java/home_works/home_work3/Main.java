@@ -2,11 +2,15 @@ package home_works.home_work3;
 
 public class Main {
     public static void main(String[] args) {
-        Task task = new Task();
+        MyFirstSolution firstSolution = new MyFirstSolution();
+        SecondSolutionWithoutTimeLimitExceeded secondSolution = new SecondSolutionWithoutTimeLimitExceeded();
 
-        boolean result = task.isAnagram("anagrammgty", "mgtynagaram");
+        boolean firstResult = firstSolution.isAnagram("anagram", "nagaram");
+        boolean secondResult = secondSolution.isAnagram("anagram", "nagaram");
 
-        System.out.println(result);
+        System.out.println(firstResult);
+        System.out.println(secondResult);
+
 
     }
 }
