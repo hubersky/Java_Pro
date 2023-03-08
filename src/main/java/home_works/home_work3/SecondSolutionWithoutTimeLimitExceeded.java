@@ -21,9 +21,7 @@ public class SecondSolutionWithoutTimeLimitExceeded {
             if (!secondArr.contains(check)) return false;
             secondArr.removeAll(Collections.singleton(firstArr.get(i)));
             firstArr.removeAll(Collections.singleton(firstArr.get(i)));
-            int firstCount = firstArr.size();
-            int secondCount = secondArr.size();
-            if (firstCount != secondCount) return false;
+            if (firstArr.size() != secondArr.size()) return false;
         }
         return true;
     }
