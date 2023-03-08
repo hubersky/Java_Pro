@@ -27,5 +27,4 @@ public class SecondSolutionWithoutTimeLimitExceeded {
         }
         return true;
     }
-
 }

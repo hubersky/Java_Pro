@@ -10,7 +10,5 @@ public class Main {
 
         System.out.println(firstResult);
         System.out.println(secondResult);
-
-
     }
 }
