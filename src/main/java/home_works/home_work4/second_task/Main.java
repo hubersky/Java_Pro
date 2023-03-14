@@ -15,26 +15,26 @@ public class Main {
     }
 
     public static void tournament(Participant[] participants, Barrier[] barriers) {
-        for (Participant p : participants) {
-            for (Barrier b : barriers) {
-                if (b.toString().contains("Racetrack")) {
-                    if (p.getRangeOfRun() >= b.overcome()) {
-                        p.run();
+        for (Participant participant : participants) {
+            for (Barrier barrier : barriers) {
+                if (barrier.toString().contains("Racetrack")) {
+                    if (participant.getRangeOfRun() >= barrier.overcome()) {
+                        participant.run();
                         System.out.println(" and pass the obstacle of racetrack!");
                     } else {
-                        p.run();
+                        participant.run();
                         System.out.println(" and doesn't pass the obstacle of racetrack!");
-                        System.out.println("The passed distance: " + p.getRangeOfRun() + " out of " + b.overcome() + "\n");
+                        System.out.println("The passed distance: " + participant.getRangeOfRun() + " out of " + barrier.overcome() + "\n");
                         break;
                     }
                 } else {
-                    if (p.getRangeOfJump() >= b.overcome()) {
-                        p.jump();
+                    if (participant.getRangeOfJump() >= barrier.overcome()) {
+                        participant.jump();
                         System.out.println(" and pass the obstacle of wall!");
                     } else {
-                        p.jump();
+                        participant.jump();
                         System.out.println(" and doesn't pass the obstacle of wall!");
-                        System.out.println("The passed height: " + p.getRangeOfJump() + " out of " + b.overcome() + "\n");
+                        System.out.println("The passed height: " + participant.getRangeOfJump() + " out of " + barrier.overcome() + "\n");
                         break;
                     }
                     System.out.println();
