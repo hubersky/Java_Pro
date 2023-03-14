@@ -6,10 +6,10 @@ public class Main {
         Geometric triangle = new Triangle(2, 3);
         Geometric square = new Square(2);
         Geometric[] geometricShape = {circle, triangle, square};
-        sumArea(geometricShape);
+        sumGeometricShape(geometricShape);
     }
 
-    public static void sumArea(Geometric[] arr) {
+    public static void sumGeometricShape(Geometric[] arr) {
         float result = 0;
         for (Geometric g : arr) {
             result += g.findFigureArea();
