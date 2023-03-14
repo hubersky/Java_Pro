@@ -24,7 +24,8 @@ public class Main {
                     } else {
                         participant.run();
                         System.out.println(" and doesn't pass the obstacle of racetrack!");
-                        System.out.println("The passed distance: " + participant.getRangeOfRun() + " out of " + barrier.overcome() + "\n");
+                        System.out.println("The passed distance: " + participant.getRangeOfRun()
+                                           + " out of " + barrier.overcome() + "\n");
                         break;
                     }
                 } else {
@@ -34,7 +35,8 @@ public class Main {
                     } else {
                         participant.jump();
                         System.out.println(" and doesn't pass the obstacle of wall!");
-                        System.out.println("The passed height: " + participant.getRangeOfJump() + " out of " + barrier.overcome() + "\n");
+                        System.out.println("The passed height: " + participant.getRangeOfJump()
+                                           + " out of " + barrier.overcome() + "\n");
                         break;
                     }
                     System.out.println();
