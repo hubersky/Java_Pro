@@ -12,7 +12,7 @@ public class PhoneDirectory {
 
     public Record find(String name) {
         for (Record record: records) {
-            if (record.toString().contains(name)){
+            if (record.getName().equals(name)){
                 return record;
             }
         }
@@ -22,7 +22,7 @@ public class PhoneDirectory {
     public List<Record> findAll(String name) {
         List<Record> returnRecord = new ArrayList<>();
         for (Record record: records) {
-            if (record.toString().contains(name)){
+            if (record.getName().equals(name)){
                 returnRecord.add(record);
             }
         }
