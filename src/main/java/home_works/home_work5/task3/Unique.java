@@ -6,7 +6,7 @@ import java.util.Set;
 
 public class Unique {
 
-    public Set<Integer> findUnique(List<Integer> list){
-        return new HashSet<>(list);
+    public Set<Integer> findUnique(List<Integer> numbers){
+        return new HashSet<>(numbers);
     }
 }

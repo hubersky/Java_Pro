@@ -5,8 +5,8 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
         int[] numbers = {1, 5, 10, 45, 12, 3};
-        Convert convert = new Convert();
-        List<Integer> newList = convert.toList(numbers);
-        System.out.println(newList);
+        Converter converter = new Converter();
+        List<Integer> convertNumbers = converter.toList(numbers);
+        System.out.println(convertNumbers);
     }
 }

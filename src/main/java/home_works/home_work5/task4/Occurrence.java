@@ -4,34 +4,34 @@ import java.util.*;
 
 public class Occurrence {
 
-    public void calcOccurrence(List<String> list) {
+    public void calcOccurrence(List<String> cars) {
         Set<String> result = new HashSet<>();
-        int count = 0;
-        for (String check : list) {
-            for (String word : list) {
+        int counter = 0;
+        for (String check : cars) {
+            for (String word : cars) {
                 if (check.equals(word)) {
-                    count += 1;
+                    counter += 1;
                 }
             }
-            result.add("The word " + check + " occurrence:" + count + " times");
-            count = 0;
+            result.add("The word " + check + " occurrence:" + counter + " times");
+            counter = 0;
         }
         for (String word: result) {
             System.out.println(word);
         }
     }
 
-    public Map<String, String> findOccurrence(List<String> list) {
+    public Map<String, String> findOccurrence(List<String> cars) {
         Map<String,String> result = new HashMap<>();
-        int count = 0;
-        for (String check : list) {
-            for (String word : list) {
+        int counter = 0;
+        for (String check : cars) {
+            for (String word : cars) {
                 if (check.equals(word)) {
-                    count += 1;
+                    counter += 1;
                 }
             }
-            result.put(check, "occurrence:" + count + " times");
-            count = 0;
+            result.put(check, "occurrence:" + counter + " times");
+            counter = 0;
         }
         return result;
     }

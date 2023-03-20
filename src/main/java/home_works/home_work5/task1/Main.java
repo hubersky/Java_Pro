@@ -4,14 +4,14 @@ import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
-        ArrayList<String> list = new ArrayList<>();
-        list.add("BMW");
-        list.add("MERCEDES");
-        list.add("AUDI");
-        list.add("BMW");
-        list.add("FERRARI");
-        list.add("GOLF");
-        Count count = new Count();
-        count.countOccurrence(list,"GOLF");
+        ArrayList<String> cars = new ArrayList<>();
+        cars.add("BMW");
+        cars.add("MERCEDES");
+        cars.add("AUDI");
+        cars.add("BMW");
+        cars.add("FERRARI");
+        cars.add("GOLF");
+        Counter counter = new Counter();
+        counter.countOccurrence(cars,"GOLF");
     }
 }
