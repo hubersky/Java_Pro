@@ -7,6 +7,9 @@ public class Main {
         List<String> cars = List.of("BMW","PORSCHE","MERCEDES","FERRARI","FERRARI","MERCEDES","GOLF","AUDI","PORSCHE");
         Occurrence occurrence = new Occurrence();
         occurrence.calcOccurrence(cars);
-        System.out.println(occurrence.findOccurrence(cars));
+        System.out.println();
+        for (Occurrence brand:occurrence.findOccurrence(cars)) {
+            System.out.println(brand);
+        }
     }
 }
