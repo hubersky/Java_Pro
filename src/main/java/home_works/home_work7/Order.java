@@ -3,15 +3,15 @@ package home_works.home_work7;
 import java.util.Objects;
 
 public class Order {
-    private final int order;
+    private final int number;
     private final String person;
 
-    public Order(int order, String person) {
-        this.order = order;
+    public Order(int number, String person) {
+        this.number = number;
         this.person = person;
     }
-    public int getOrder() {
-        return order;
+    public int getNumber() {
+        return number;
     }
 
     public String getPerson() {
@@ -23,18 +23,18 @@ public class Order {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Order order1 = (Order) o;
-        return Objects.equals(order, order1.order) && Objects.equals(person, order1.person);
+        return Objects.equals(number, order1.number) && Objects.equals(person, order1.person);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(order, person);
+        return Objects.hash(number, person);
     }
 
     @Override
     public String toString() {
         return "Order{" +
-                "order=" + order +
+                "order=" + number +
                 ", person='" + person + '\'' +
                 '}';
     }

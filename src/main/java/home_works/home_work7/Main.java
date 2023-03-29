@@ -2,7 +2,6 @@ package home_works.home_work7;
 
 import java.util.List;
 
-
 public class Main {
     public static void main(String[] args) {
         List<Order> orders = List.of(
@@ -15,7 +14,7 @@ public class Main {
         CoffeeOrderBoard board = new CoffeeOrderBoard();
 
         for (Order order : orders) {
-            board.add(order.getOrder(), order);
+            board.add(order.getNumber(), order);
         }
 
         board.deliver();

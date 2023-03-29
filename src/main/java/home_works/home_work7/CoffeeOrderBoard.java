@@ -18,8 +18,8 @@ public class CoffeeOrderBoard {
         System.out.println("Order received by: " + orders.remove(firstOrder).getPerson());
     }
 
-    public void deliver(int order) {
-        System.out.println("Order received by: " + orders.remove(order).getPerson());
+    public void deliver(int number) {
+        System.out.println("Order received by: " + orders.remove(number).getPerson());
     }
 
     public void draw() {
