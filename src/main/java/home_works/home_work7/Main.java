@@ -8,7 +8,7 @@ public class Main {
                 new Order("Valley King"),
                 new Order("Max Verstappen"),
                 new Order("Fernando Alonso"),
-                new Order("Lando Noris"),
+                new Order("Lando Norris"),
                 new Order("Valentino Rossi"));
 
         CoffeeOrderBoard board = new CoffeeOrderBoard();
