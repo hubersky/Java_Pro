@@ -4,27 +4,30 @@ import java.util.*;
 
 public class CoffeeOrderBoard {
 
-    private final Map<Integer, Order> orders = new TreeMap<>();
+    private int counter;
+    private final Queue<Order> orders = new LinkedList<>();
 
-    public void add(int number, Order order) {
-        orders.put(number, order);
+    public void add(Order order) {
+        order.setNumber(++counter);
+        orders.add(order);
     }
 
     public void deliver() {
-        int firstOrder = 1;
-        for (int number: orders.keySet()) {
-            if (firstOrder > number) firstOrder = number;
-        }
-        System.out.println("Order received by: " + orders.remove(firstOrder).getPerson());
+        System.out.println("Order received by: " + orders.remove().getPerson());
     }
 
     public void deliver(int number) {
-        System.out.println("Order received by: " + orders.remove(number).getPerson());
+        for (Order order : orders) {
+            if (order.getNumber() == number) {
+                System.out.println("Order received by: " + order.getPerson());
+                orders.remove(order);
+            }
+        }
     }
 
     public void draw() {
-        for (Map.Entry <Integer, Order> order:orders.entrySet()){
-            System.out.println(order.getKey() + " " + order.getValue());
+        for (Order order : orders) {
+            System.out.println(order);
         }
     }
 }

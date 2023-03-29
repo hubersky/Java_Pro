@@ -3,13 +3,18 @@ package home_works.home_work7;
 import java.util.Objects;
 
 public class Order {
-    private final int number;
+
+    private int number;
     private final String person;
 
-    public Order(int number, String person) {
-        this.number = number;
+    public Order(String person) {
         this.person = person;
     }
+
+    public void setNumber(int number) {
+        if (number > 0) this.number = number;
+    }
+
     public int getNumber() {
         return number;
     }
