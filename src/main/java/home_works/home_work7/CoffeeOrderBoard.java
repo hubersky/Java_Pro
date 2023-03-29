@@ -14,6 +14,7 @@ public class CoffeeOrderBoard {
 
     public void deliver() {
         System.out.println("Order received by: " + orders.remove().getPerson());
+        if (orders.isEmpty()) counter = 0;
     }
 
     public void deliver(int number) {
@@ -23,6 +24,7 @@ public class CoffeeOrderBoard {
                 orders.remove(order);
             }
         }
+        if (orders.isEmpty()) counter = 0;
     }
 
     public void draw() {
