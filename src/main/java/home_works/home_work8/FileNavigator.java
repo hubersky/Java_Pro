@@ -42,8 +42,8 @@ public class FileNavigator {
 
     public List<FileData> sortBySize() {
         List<FileData> sortedFiles = new LinkedList<>();
-        for (Map.Entry<String, List<FileData>> files : this.groupFiles.entrySet()) {
-            sortedFiles.addAll(files.getValue());
+        for (List<FileData> files : groupFiles.values()) {
+            sortedFiles.addAll(files);
         }
         sortedFiles.sort(Comparator.naturalOrder());
         return sortedFiles;
