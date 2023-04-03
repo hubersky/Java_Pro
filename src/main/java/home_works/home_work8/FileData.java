@@ -50,6 +50,6 @@ public class FileData implements Comparable<FileData> {
 
     @Override
     public int compareTo(FileData o) {
-        return o.size - size;
+        return this.size - o.size;
     }
 }

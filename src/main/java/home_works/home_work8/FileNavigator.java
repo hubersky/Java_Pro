@@ -4,7 +4,7 @@ import java.util.*;
 
 public class FileNavigator {
 
-    Map<String, List<FileData>> groupFiles = new HashMap<>();
+    private final Map<String, List<FileData>> groupFiles = new HashMap<>();
 
     public void add(String path, FileData file) {
         if (!path.equals(file.getPath())) {
@@ -28,8 +28,8 @@ public class FileNavigator {
 
     public List<FileData> filterBySize(int size) {
         List<FileData> filesBySize = new LinkedList<>();
-        for (Map.Entry<String, List<FileData>> files : this.groupFiles.entrySet()) {
-            for (FileData file : files.getValue()) {
+        for (List<FileData> files : groupFiles.values()) {
+            for (FileData file : files) {
                 if (file.getSize() <= size) filesBySize.add(file);
             }
         }
@@ -45,7 +45,7 @@ public class FileNavigator {
         for (Map.Entry<String, List<FileData>> files : this.groupFiles.entrySet()) {
             sortedFiles.addAll(files.getValue());
         }
-        sortedFiles.sort(Comparator.reverseOrder());
+        sortedFiles.sort(Comparator.naturalOrder());
         return sortedFiles;
     }
 }
