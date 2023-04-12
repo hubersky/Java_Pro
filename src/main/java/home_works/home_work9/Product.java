@@ -71,9 +71,9 @@ public class Product {
 
     public Map<String, List<Product>> getGroupProductByType(List<Product> products) {
         return products.stream().collect(Collectors.toMap(Product::getType, v -> {
-            List<Product> productsToMap = new LinkedList<>();
-            productsToMap.add(v);
-            return productsToMap;
+            List<Product> convertProducts = new LinkedList<>();
+            convertProducts.add(v);
+            return convertProducts;
         }, (v, s) -> {
             s.addAll(v);
             return s;
