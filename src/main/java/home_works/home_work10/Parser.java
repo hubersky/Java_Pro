@@ -19,18 +19,17 @@ public class Parser {
             Scanner scanner = new Scanner(reader);
             List<String> content = new ArrayList<>();
             while (scanner.hasNextLine()) {
-                String[] text = scanner.nextLine().replaceAll("\\W", " ").split(" ");
-                content.addAll(Arrays.asList(text));
+                String[] words = scanner.nextLine().replaceAll("\\W", " ").split(" ");
+                content.addAll(Arrays.asList(words));
             }
             scanner.close();
-            writeStatistic(countWord(content));
+            writeStatistic(countWords(content), countUniqueWords(content));
         } catch (IOException ex) {
             System.out.println("Book doesn't exist!");
         }
     }
 
-    public Map<String, Integer> countWord(List<String> content) {
-        int countUniqueWord = (int) content.stream().distinct().count();
+    public Map<String, Integer> countWords(List<String> content) {
         Map<String, Integer> countWord = content.stream()
                 .filter(x -> x.length() > 2)
                 .collect(Collectors.toMap(e -> e, e -> 1, Integer::sum));
@@ -38,18 +37,24 @@ public class Parser {
                 .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
                 .limit(10)
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (a, b) -> a, LinkedHashMap::new));
-        countWord.put("Total number of unique words:", countUniqueWord);
-        countWord.forEach((k,v)-> System.out.println(k + " " + v));
+        countWord.forEach((k, v) -> System.out.println(k + " " + v));
         return countWord;
     }
 
-    public void writeStatistic(Map<String, Integer> content) {
+    public String countUniqueWords(List<String> content) {
+        String uniqueWords = "Total number of unique words: " + content.stream().distinct().count();
+        System.out.println(uniqueWords);
+        return uniqueWords;
+    }
+
+    public void writeStatistic(Map<String, Integer> content, String uniqueWords) {
         try {
             FileWriter writer = new FileWriter("src/statistic.txt");
-            for (Map.Entry<String, Integer> word: content.entrySet()) {
+            for (Map.Entry<String, Integer> word : content.entrySet()) {
                 writer.write(word.getKey() + " " + word.getValue() + "\n");
                 writer.flush();
             }
+            writer.write(uniqueWords);
             writer.close();
         } catch (IOException e) {
             throw new RuntimeException(e);
