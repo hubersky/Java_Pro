@@ -46,8 +46,8 @@ public class Parser {
     public void writeStatistic(Map<String, Integer> content) {
         try {
             FileWriter writer = new FileWriter("src/statistic.txt");
-            for (Map.Entry<String, Integer> map: content.entrySet()) {
-                writer.write(map.getKey() + " " + map.getValue() + "\n");
+            for (Map.Entry<String, Integer> word: content.entrySet()) {
+                writer.write(word.getKey() + " " + word.getValue() + "\n");
                 writer.flush();
             }
             writer.close();
