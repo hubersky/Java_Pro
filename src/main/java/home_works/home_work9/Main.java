@@ -20,17 +20,17 @@ public class Main {
         products.add(new Product(10, "Book", 21, false, LocalDateTime.of(2023, 4, 5, 4, 4)));
         products.add(new Product(11, "Book", 338, true, LocalDateTime.of(2023, 12, 15, 4, 4)));
 
-        Product productManipulator = new Product();
-        productManipulator.getProductByType(products, "Book").forEach(System.out::println);
+        ProductService productService = new ProductService();
+        productService.getProductByType(products, "Book").forEach(System.out::println);
         System.out.println();
-        productManipulator.getProductByDiscount(products, "Book").forEach(System.out::println);
+        productService.getProductByDiscount(products, "Book").forEach(System.out::println);
         System.out.println();
-        productManipulator.getProductByLowestPrice(products, "Book");
+        System.out.println(productService.getProductByLowestPrice(products, "Book"));
         System.out.println();
-        productManipulator.getLastThreeAddedProduct(products).forEach(System.out::println);
+        productService.getLastThreeAddedProduct(products).forEach(System.out::println);
         System.out.println();
-        productManipulator.getOverallCostOfProduct(products, "Book");
+        System.out.println("Overall price is: " + productService.getOverallCostOfProduct(products, "Book"));
         System.out.println();
-        productManipulator.getGroupProductByType(products).forEach((k, v) -> System.out.println(k + " " + v));
+        productService.getGroupProductByType(products).forEach((k, v) -> System.out.println(k + " " + v));
     }
 }
