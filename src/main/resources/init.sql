@@ -10,7 +10,7 @@ CREATE TABLE lesson
     id int PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     name text NOT NULL,
     updatedAt date NOT NULL,
-    homework_id int REFERENCES homework(id)
+    homework_id int UNIQUE REFERENCES homework(id)
 );
 
 CREATE TABLE lessons
