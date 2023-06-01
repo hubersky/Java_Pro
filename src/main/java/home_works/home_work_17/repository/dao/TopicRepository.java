@@ -1,10 +1,13 @@
 package home_works.home_work_17.repository.dao;
 
 import home_works.home_work_17.model.Topic;
+import java.util.List;
 
 public interface TopicRepository {
 
-    boolean save(Topic topic);
+    List<Topic> getAll();
+
+    boolean add(Topic topic);
 
     Topic get(int id);
 

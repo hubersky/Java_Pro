@@ -1,10 +1,13 @@
 package home_works.home_work_17.repository.dao;
 
 import home_works.home_work_17.model.Question;
+import java.util.List;
 
 public interface QuestionRepository {
 
-    boolean save(Question question);
+    List<Question> getAll();
+
+    boolean add(Question question);
 
     Question get(int id);
 
