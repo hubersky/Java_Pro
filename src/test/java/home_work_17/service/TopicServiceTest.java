@@ -8,14 +8,14 @@ import org.junit.Test;
 
 public class TopicServiceTest {
 
-    private TopicServiceMock topicServiceMock;
+    private TopicRepositoryMock topicRepositoryMock;
     private TopicService topicService;
     private final Topic testTopic = Topic.builder().id(0).name("Test").build();
 
     @Before
     public void init() {
-        topicServiceMock = new TopicServiceMock();
-        topicService = new TopicService(topicServiceMock);
+        topicRepositoryMock = new TopicRepositoryMock();
+        topicService = new TopicService(topicRepositoryMock);
     }
 
     @Test

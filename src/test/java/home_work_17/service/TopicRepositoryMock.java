@@ -4,7 +4,7 @@ import home_works.home_work_17.model.Topic;
 import home_works.home_work_17.repository.dao.TopicRepository;
 import java.util.List;
 
-public class TopicServiceMock implements TopicRepository {
+public class TopicRepositoryMock implements TopicRepository {
 
     private final Topic testTopic = Topic.builder().id(0).name("Test").build();
 
