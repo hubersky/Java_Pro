@@ -1,9 +1,9 @@
-package home_works.home_work_17.main;
+package home_works.home_work_JDBC.main;
 
-import home_works.home_work_17.repository.QuestionRepositoryPostgres;
-import home_works.home_work_17.repository.TopicRepositoryPostgres;
-import home_works.home_work_17.service.QuestionService;
-import home_works.home_work_17.service.TopicService;
+import home_works.home_work_JDBC.repository.QuestionRepositoryPostgres;
+import home_works.home_work_JDBC.repository.TopicRepositoryPostgres;
+import home_works.home_work_JDBC.service.QuestionService;
+import home_works.home_work_JDBC.service.TopicService;
 import java.util.Scanner;
 
 public class Main {

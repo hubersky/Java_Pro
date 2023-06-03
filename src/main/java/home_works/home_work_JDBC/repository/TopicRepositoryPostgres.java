@@ -1,8 +1,12 @@
-package home_works.home_work_17.repository;
+package home_works.home_work_JDBC.repository;
 
-import home_works.home_work_17.model.Topic;
-import home_works.home_work_17.repository.dao.TopicRepository;
-import home_works.home_work_17.service.ConnectionService;
+import home_works.home_work_JDBC.exception.AddException;
+import home_works.home_work_JDBC.exception.GetException;
+import home_works.home_work_JDBC.exception.RemoveException;
+import home_works.home_work_JDBC.exception.UpdateException;
+import home_works.home_work_JDBC.model.Topic;
+import home_works.home_work_JDBC.repository.dao.TopicRepository;
+import home_works.home_work_JDBC.service.ConnectionService;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -47,8 +51,8 @@ public class TopicRepositoryPostgres implements TopicRepository {
                 topics.add(build);
             }
             return topics;
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+        } catch (SQLException ex) {
+            throw new GetException("Get all topic!" + ex);
         }
     }
 
@@ -58,8 +62,8 @@ public class TopicRepositoryPostgres implements TopicRepository {
             PreparedStatement preparedStatement = ConnectionService.getConnection().prepareStatement(SAVE);
             preparedStatement.setString(1, topic.getName());
             return preparedStatement.execute();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+        } catch (SQLException ex) {
+            throw new AddException("Add topic!" + ex);
         }
     }
 
@@ -76,8 +80,8 @@ public class TopicRepositoryPostgres implements TopicRepository {
                     .id(resultSet.getInt("id"))
                     .build();
 
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+        } catch (SQLException ex) {
+            throw new GetException("Get topic by id!" + ex);
         }
     }
 
@@ -87,8 +91,8 @@ public class TopicRepositoryPostgres implements TopicRepository {
             PreparedStatement preparedStatement = ConnectionService.getConnection().prepareStatement(REMOVE);
             preparedStatement.setInt(1, id);
             return preparedStatement.execute();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+        } catch (SQLException ex) {
+            throw new RemoveException("Remove topic by id!" + ex);
         }
     }
 
@@ -99,8 +103,8 @@ public class TopicRepositoryPostgres implements TopicRepository {
             preparedStatement.setString(1, topic.getName());
             preparedStatement.setInt(2, topic.getId());
             return preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+        } catch (SQLException ex) {
+            throw new UpdateException("Update topic!" + ex);
         }
     }
 }

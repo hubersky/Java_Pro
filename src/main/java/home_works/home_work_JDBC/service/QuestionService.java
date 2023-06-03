@@ -1,7 +1,7 @@
-package home_works.home_work_17.service;
+package home_works.home_work_JDBC.service;
 
-import home_works.home_work_17.model.Question;
-import home_works.home_work_17.repository.dao.QuestionRepository;
+import home_works.home_work_JDBC.model.Question;
+import home_works.home_work_JDBC.repository.dao.QuestionRepository;
 import java.util.List;
 
 public class QuestionService {

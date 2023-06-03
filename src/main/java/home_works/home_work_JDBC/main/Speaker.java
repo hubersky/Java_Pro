@@ -1,9 +1,9 @@
-package home_works.home_work_17.main;
+package home_works.home_work_JDBC.main;
 
-import home_works.home_work_17.model.Question;
-import home_works.home_work_17.model.Topic;
-import home_works.home_work_17.service.QuestionService;
-import home_works.home_work_17.service.TopicService;
+import home_works.home_work_JDBC.model.Question;
+import home_works.home_work_JDBC.model.Topic;
+import home_works.home_work_JDBC.service.QuestionService;
+import home_works.home_work_JDBC.service.TopicService;
 import java.util.List;
 import java.util.Scanner;
 
@@ -53,7 +53,9 @@ public class Speaker {
         for (Topic findTopic : topics) {
             if (topic.equals(findTopic.getName())) topicId = findTopic.getId();
         }
-        System.out.println("Question: " + questionService.getRandomQuestionByTopic(topicId).getText() + "\n");
+        if (topicId != 0) {
+            System.out.println("Question: " + questionService.getRandomQuestionByTopic(topicId).getText() + "\n");
+        } else System.out.println("Wrong Topic!");
     }
 
     private void addQuestion() {
@@ -81,7 +83,7 @@ public class Speaker {
         List<Topic> topics = topicService.getAllTopic();
         for (Topic topic : topics) {
             System.out.println(topic.getName());
-        };
+        }
         return topics;
     }
 

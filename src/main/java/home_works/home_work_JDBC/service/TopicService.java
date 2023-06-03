@@ -1,7 +1,7 @@
-package home_works.home_work_17.service;
+package home_works.home_work_JDBC.service;
 
-import home_works.home_work_17.model.Topic;
-import home_works.home_work_17.repository.dao.TopicRepository;
+import home_works.home_work_JDBC.model.Topic;
+import home_works.home_work_JDBC.repository.dao.TopicRepository;
 import java.util.List;
 
 public class TopicService {

@@ -1,9 +1,12 @@
-package home_works.home_work_17.repository;
+package home_works.home_work_JDBC.repository;
 
-import home_works.home_work_17.exception.RemoveException;
-import home_works.home_work_17.model.Question;
-import home_works.home_work_17.repository.dao.QuestionRepository;
-import home_works.home_work_17.service.ConnectionService;
+import home_works.home_work_JDBC.exception.AddException;
+import home_works.home_work_JDBC.exception.GetException;
+import home_works.home_work_JDBC.exception.RemoveException;
+import home_works.home_work_JDBC.exception.UpdateException;
+import home_works.home_work_JDBC.model.Question;
+import home_works.home_work_JDBC.repository.dao.QuestionRepository;
+import home_works.home_work_JDBC.service.ConnectionService;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -49,8 +52,8 @@ public class QuestionRepositoryPostgres implements QuestionRepository {
                 questions.add(build);
             }
             return questions;
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+        } catch (SQLException ex) {
+            throw new GetException("Get all question!" + ex);
         }
     }
 
@@ -61,8 +64,8 @@ public class QuestionRepositoryPostgres implements QuestionRepository {
             preparedStatement.setString(1, question.getText());
             preparedStatement.setInt(2, question.getTopic_id());
             return preparedStatement.execute();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+        } catch (SQLException ex) {
+            throw new AddException("Add question!" + ex);
         }
     }
 
@@ -78,8 +81,8 @@ public class QuestionRepositoryPostgres implements QuestionRepository {
                     .text(resultSet.getString("text"))
                     .id(resultSet.getInt("id"))
                     .build();
-        } catch (SQLException e) {
-            throw new RemoveException();
+        } catch (SQLException ex) {
+            throw new GetException("Get question by id!" + ex);
         }
     }
 
@@ -89,8 +92,8 @@ public class QuestionRepositoryPostgres implements QuestionRepository {
             PreparedStatement preparedStatement = ConnectionService.getConnection().prepareStatement(REMOVE);
             preparedStatement.setInt(1, id);
             return preparedStatement.execute();
-        } catch (SQLException e) {
-            throw new RemoveException();
+        } catch (SQLException ex) {
+            throw new RemoveException("Remove question by id!" + ex);
         }
     }
 
@@ -102,8 +105,8 @@ public class QuestionRepositoryPostgres implements QuestionRepository {
             preparedStatement.setInt(2, question.getTopic_id());
             preparedStatement.setInt(3, question.getId());
             return preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+        } catch (SQLException ex) {
+            throw new UpdateException("Update question!" + ex);
         }
     }
 }

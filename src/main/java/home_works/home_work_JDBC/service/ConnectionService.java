@@ -1,4 +1,4 @@
-package home_works.home_work_17.service;
+package home_works.home_work_JDBC.service;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

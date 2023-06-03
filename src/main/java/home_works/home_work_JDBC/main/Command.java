@@ -1,4 +1,4 @@
-package home_works.home_work_17.main;
+package home_works.home_work_JDBC.main;
 
 public enum Command {
 
