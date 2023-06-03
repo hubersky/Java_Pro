@@ -42,7 +42,7 @@ public class Speaker {
     }
 
     private void getRandomQuestion() {
-        System.out.println(questionService.getRandomQuestion().getText() + "\n");
+        System.out.println("Question: " + questionService.getRandomQuestion().getText() + "\n");
     }
 
     private void getRandomQuestionByTopic() {
@@ -74,9 +74,15 @@ public class Speaker {
 
     private void removeQuestion() {
         System.out.print("Enter the question id you want to remove: ");
-        int questionId = scanner.nextInt();
-        questionService.removeQuestion(questionId);
-        System.out.println("Question remove successfully!" + "\n");
+        int questionId;
+        if (scanner.hasNextInt()) {
+            questionId = scanner.nextInt();
+            questionService.removeQuestion(questionId);
+            System.out.println("Question remove successfully!" + "\n");
+        } else {
+            System.out.println("Wrong Data!");
+            scanner.next();
+        }
     }
 
     private List<Topic> getTopic() {

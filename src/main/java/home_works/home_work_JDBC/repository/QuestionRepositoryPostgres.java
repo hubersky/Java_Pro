@@ -38,8 +38,7 @@ public class QuestionRepositoryPostgres implements QuestionRepository {
 
     @Override
     public List<Question> getAll() {
-        try {
-            PreparedStatement preparedStatement = ConnectionService.getConnection().prepareStatement(SELECT_All);
+        try (PreparedStatement preparedStatement = ConnectionService.getConnection().prepareStatement(SELECT_All)){
             preparedStatement.execute();
             ResultSet resultSet = preparedStatement.getResultSet();
             List<Question> questions = new ArrayList<>();
@@ -53,26 +52,24 @@ public class QuestionRepositoryPostgres implements QuestionRepository {
             }
             return questions;
         } catch (SQLException ex) {
-            throw new GetException("Get all question!" + ex);
+            throw new GetException("Get all question error!" + ex.getMessage());
         }
     }
 
     @Override
     public boolean add(Question question) {
-        try {
-            PreparedStatement preparedStatement = ConnectionService.getConnection().prepareStatement(SAVE);
+        try (PreparedStatement preparedStatement = ConnectionService.getConnection().prepareStatement(SAVE)){
             preparedStatement.setString(1, question.getText());
             preparedStatement.setInt(2, question.getTopic_id());
             return preparedStatement.execute();
         } catch (SQLException ex) {
-            throw new AddException("Add question!" + ex);
+            throw new AddException("Add question error!" + ex.getMessage());
         }
     }
 
     @Override
     public Question get(int id) {
-        try {
-            PreparedStatement preparedStatement = ConnectionService.getConnection().prepareStatement(GET);
+        try (PreparedStatement preparedStatement = ConnectionService.getConnection().prepareStatement(GET)){
             preparedStatement.setInt(1, id);
             preparedStatement.execute();
             ResultSet resultSet = preparedStatement.getResultSet();
@@ -82,31 +79,29 @@ public class QuestionRepositoryPostgres implements QuestionRepository {
                     .id(resultSet.getInt("id"))
                     .build();
         } catch (SQLException ex) {
-            throw new GetException("Get question by id!" + ex);
+            throw new GetException("Get question by id error!" + ex.getMessage());
         }
     }
 
     @Override
     public boolean remove(int id) {
-        try {
-            PreparedStatement preparedStatement = ConnectionService.getConnection().prepareStatement(REMOVE);
+        try (PreparedStatement preparedStatement = ConnectionService.getConnection().prepareStatement(REMOVE)){
             preparedStatement.setInt(1, id);
             return preparedStatement.execute();
         } catch (SQLException ex) {
-            throw new RemoveException("Remove question by id!" + ex);
+            throw new RemoveException("Remove question by id error!" + ex.getMessage());
         }
     }
 
     @Override
     public int update(Question question) {
-        try {
-            PreparedStatement preparedStatement = ConnectionService.getConnection().prepareStatement(UPDATE);
+        try (PreparedStatement preparedStatement = ConnectionService.getConnection().prepareStatement(UPDATE)){
             preparedStatement.setString(1, question.getText());
             preparedStatement.setInt(2, question.getTopic_id());
             preparedStatement.setInt(3, question.getId());
             return preparedStatement.executeUpdate();
         } catch (SQLException ex) {
-            throw new UpdateException("Update question!" + ex);
+            throw new UpdateException("Update question error!" + ex.getMessage());
         }
     }
 }

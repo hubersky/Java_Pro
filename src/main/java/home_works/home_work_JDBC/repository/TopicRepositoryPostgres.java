@@ -38,8 +38,7 @@ public class TopicRepositoryPostgres implements TopicRepository {
 
     @Override
     public List<Topic> getAll() {
-        try {
-            PreparedStatement preparedStatement = ConnectionService.getConnection().prepareStatement(SELECT_All);
+        try (PreparedStatement preparedStatement = ConnectionService.getConnection().prepareStatement(SELECT_All)){
             preparedStatement.execute();
             ResultSet resultSet = preparedStatement.getResultSet();
             List<Topic> topics = new ArrayList<>();
@@ -52,25 +51,23 @@ public class TopicRepositoryPostgres implements TopicRepository {
             }
             return topics;
         } catch (SQLException ex) {
-            throw new GetException("Get all topic!" + ex);
+            throw new GetException("Get all topic error!" + ex.getMessage());
         }
     }
 
     @Override
     public boolean add(Topic topic) {
-        try {
-            PreparedStatement preparedStatement = ConnectionService.getConnection().prepareStatement(SAVE);
+        try (PreparedStatement preparedStatement = ConnectionService.getConnection().prepareStatement(SAVE)){
             preparedStatement.setString(1, topic.getName());
             return preparedStatement.execute();
         } catch (SQLException ex) {
-            throw new AddException("Add topic!" + ex);
+            throw new AddException("Add topic error!" + ex.getMessage());
         }
     }
 
     @Override
     public Topic get(int id) {
-        try {
-            PreparedStatement preparedStatement = ConnectionService.getConnection().prepareStatement(GET);
+        try(PreparedStatement preparedStatement = ConnectionService.getConnection().prepareStatement(GET)) {
             preparedStatement.execute();
             preparedStatement.setInt(1,id);
             ResultSet resultSet = preparedStatement.getResultSet();
@@ -81,30 +78,28 @@ public class TopicRepositoryPostgres implements TopicRepository {
                     .build();
 
         } catch (SQLException ex) {
-            throw new GetException("Get topic by id!" + ex);
+            throw new GetException("Get topic by id error!" + ex.getMessage());
         }
     }
 
     @Override
     public boolean remove(int id) {
-        try {
-            PreparedStatement preparedStatement = ConnectionService.getConnection().prepareStatement(REMOVE);
+        try (PreparedStatement preparedStatement = ConnectionService.getConnection().prepareStatement(REMOVE)){
             preparedStatement.setInt(1, id);
             return preparedStatement.execute();
         } catch (SQLException ex) {
-            throw new RemoveException("Remove topic by id!" + ex);
+            throw new RemoveException("Remove topic by id error!" + ex.getMessage());
         }
     }
 
     @Override
     public int update(Topic topic) {
-        try {
-            PreparedStatement preparedStatement = ConnectionService.getConnection().prepareStatement(UPDATE);
+        try (PreparedStatement preparedStatement = ConnectionService.getConnection().prepareStatement(UPDATE)){
             preparedStatement.setString(1, topic.getName());
             preparedStatement.setInt(2, topic.getId());
             return preparedStatement.executeUpdate();
         } catch (SQLException ex) {
-            throw new UpdateException("Update topic!" + ex);
+            throw new UpdateException("Update topic error!" + ex.getMessage());
         }
     }
 }
