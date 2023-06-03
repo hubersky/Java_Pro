@@ -4,6 +4,7 @@ import home_works.home_work_JDBC.model.Question;
 import home_works.home_work_JDBC.model.Topic;
 import home_works.home_work_JDBC.service.QuestionService;
 import home_works.home_work_JDBC.service.TopicService;
+
 import java.util.List;
 import java.util.Scanner;
 
@@ -25,20 +26,23 @@ public class Speaker {
         for (Command command : commands) {
             System.out.println(command.command);
         }
-        int commandNumber = scanner.nextInt();
-        switch (commandNumber) {
-            case 1 -> getRandomQuestionByTopic();
-            case 2 -> getRandomQuestion();
-            case 3 -> addQuestion();
-            case 4 -> removeQuestion();
-            case 5 -> getTopic();
-            case 6 -> addTopic();
-            default -> System.out.println("Wrong command!");
-        }
-        System.out.println("Would you like to continue?");
-        String answer = scanner.next().toLowerCase();
-        if (answer.equals("yes")) run();
-        else System.out.println("See you soon!");
+        int commandNumber;
+        if (scanner.hasNextInt()) {
+            commandNumber = scanner.nextInt();
+            switch (commandNumber) {
+                case 1 -> getRandomQuestionByTopic();
+                case 2 -> getRandomQuestion();
+                case 3 -> addQuestion();
+                case 4 -> removeQuestion();
+                case 5 -> getTopic();
+                case 6 -> addTopic();
+                default -> System.out.println("Wrong command!");
+            }
+            System.out.println("Would you like to continue?");
+            String answer = scanner.next().toLowerCase();
+            if (answer.equals("yes")) run();
+            else System.out.println("See you soon!");
+        }else System.out.println("Wrong Data!");
     }
 
     private void getRandomQuestion() {
