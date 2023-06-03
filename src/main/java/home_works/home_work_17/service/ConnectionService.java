@@ -10,9 +10,15 @@ public class ConnectionService {
     private static final String name = "postgres";
     private static final String password = "marouned";
 
-    public static Connection getConnection() throws SQLException {
-        if (connection == null || connection.isClosed()) {
-            connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/java", name, password);
+    public static Connection getConnection() {
+        try {
+            if (connection == null || connection.isClosed()) {
+                connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/java", name, password);
+            }
+        } catch (SQLException ex) {
+            System.err.println("Can't create connection to DB");
+            ex.printStackTrace();
+            System.exit(1);
         }
         return connection;
     }

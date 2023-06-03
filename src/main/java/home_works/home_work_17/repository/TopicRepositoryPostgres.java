@@ -2,16 +2,14 @@ package home_works.home_work_17.repository;
 
 import home_works.home_work_17.model.Topic;
 import home_works.home_work_17.repository.dao.TopicRepository;
+import home_works.home_work_17.service.ConnectionService;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class TopicRepositoryPostgres implements TopicRepository {
 
-    private final Connection connection;
-
     private static final String SELECT_All = "SELECT * FROM public.topic";
-
     private static final String GET =
             """
                     SELECT * FROM public.topic
@@ -34,15 +32,12 @@ public class TopicRepositoryPostgres implements TopicRepository {
                     WHERE  id = ?
                     """;
 
-    public TopicRepositoryPostgres(Connection connection) {
-        this.connection = connection;
-    }
-
     @Override
     public List<Topic> getAll() {
         try {
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(SELECT_All);
+            PreparedStatement preparedStatement = ConnectionService.getConnection().prepareStatement(SELECT_All);
+            preparedStatement.execute();
+            ResultSet resultSet = preparedStatement.getResultSet();
             List<Topic> topics = new ArrayList<>();
             while (resultSet.next()) {
                 Topic build = Topic.builder()
@@ -60,7 +55,7 @@ public class TopicRepositoryPostgres implements TopicRepository {
     @Override
     public boolean add(Topic topic) {
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(SAVE);
+            PreparedStatement preparedStatement = ConnectionService.getConnection().prepareStatement(SAVE);
             preparedStatement.setString(1, topic.getName());
             return preparedStatement.execute();
         } catch (SQLException e) {
@@ -71,10 +66,11 @@ public class TopicRepositoryPostgres implements TopicRepository {
     @Override
     public Topic get(int id) {
         try {
-            Statement statement = this.connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(GET);
+            PreparedStatement preparedStatement = ConnectionService.getConnection().prepareStatement(GET);
+            preparedStatement.execute();
+            preparedStatement.setInt(1,id);
+            ResultSet resultSet = preparedStatement.getResultSet();
             resultSet.next();
-
             return Topic.builder()
                     .name(resultSet.getString("name"))
                     .id(resultSet.getInt("id"))
@@ -88,7 +84,7 @@ public class TopicRepositoryPostgres implements TopicRepository {
     @Override
     public boolean remove(int id) {
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(REMOVE);
+            PreparedStatement preparedStatement = ConnectionService.getConnection().prepareStatement(REMOVE);
             preparedStatement.setInt(1, id);
             return preparedStatement.execute();
         } catch (SQLException e) {
@@ -99,7 +95,7 @@ public class TopicRepositoryPostgres implements TopicRepository {
     @Override
     public int update(Topic topic) {
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(UPDATE);
+            PreparedStatement preparedStatement = ConnectionService.getConnection().prepareStatement(UPDATE);
             preparedStatement.setString(1, topic.getName());
             preparedStatement.setInt(2, topic.getId());
             return preparedStatement.executeUpdate();
