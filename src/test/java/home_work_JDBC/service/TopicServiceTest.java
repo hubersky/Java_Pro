@@ -1,7 +1,7 @@
-package home_work_17.service;
+package home_work_JDBC.service;
 
-import home_works.home_work_17.model.Topic;
-import home_works.home_work_17.service.TopicService;
+import home_works.home_work_JDBC.model.Topic;
+import home_works.home_work_JDBC.service.TopicService;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

@@ -1,6 +1,6 @@
-package home_works.home_work_17.repository.dao;
+package home_works.home_work_JDBC.repository.dao;
 
-import home_works.home_work_17.model.Question;
+import home_works.home_work_JDBC.model.Question;
 import java.util.List;
 
 public interface QuestionRepository {

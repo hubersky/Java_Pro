@@ -1,4 +1,4 @@
-package home_works.home_work_17.model;
+package home_works.home_work_JDBC.model;
 
 import lombok.Builder;
 import lombok.Data;

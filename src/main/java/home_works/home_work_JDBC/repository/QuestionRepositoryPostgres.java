@@ -1,18 +1,19 @@
-package home_works.home_work_17.repository;
+package home_works.home_work_JDBC.repository;
 
-import home_works.home_work_17.model.Question;
-import home_works.home_work_17.repository.dao.QuestionRepository;
-import home_works.home_work_17.service.ConnectionService;
+import home_works.home_work_JDBC.exception.AddException;
+import home_works.home_work_JDBC.exception.GetException;
+import home_works.home_work_JDBC.exception.RemoveException;
+import home_works.home_work_JDBC.exception.UpdateException;
+import home_works.home_work_JDBC.model.Question;
+import home_works.home_work_JDBC.repository.dao.QuestionRepository;
+import home_works.home_work_JDBC.service.ConnectionService;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class QuestionRepositoryPostgres implements QuestionRepository {
 
-    private final Connection connection;
-
     private static final String SELECT_All = "SELECT * FROM public.question";
-
     private static final String GET =
             """
                     SELECT * FROM public.question
@@ -20,8 +21,8 @@ public class QuestionRepositoryPostgres implements QuestionRepository {
                     """;
     private static final String SAVE =
             """
-                    INSERT INTO public.question(text)
-                    VALUES (?)
+                    INSERT INTO public.question(text,topic_id)
+                    VALUES (?,?)
                     """;
     private static final String REMOVE =
             """
@@ -35,20 +36,11 @@ public class QuestionRepositoryPostgres implements QuestionRepository {
                     WHERE  id = ?
                     """;
 
-    public QuestionRepositoryPostgres() {
-        try {
-            this.connection = ConnectionService.getConnection();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     @Override
     public List<Question> getAll() {
-
-        try {
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(SELECT_All);
+        try (PreparedStatement preparedStatement = ConnectionService.getConnection().prepareStatement(SELECT_All)){
+            preparedStatement.execute();
+            ResultSet resultSet = preparedStatement.getResultSet();
             List<Question> questions = new ArrayList<>();
             while (resultSet.next()) {
                 Question build = Question.builder()
@@ -59,59 +51,57 @@ public class QuestionRepositoryPostgres implements QuestionRepository {
                 questions.add(build);
             }
             return questions;
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+        } catch (SQLException ex) {
+            throw new GetException("Get all question error!" + ex.getMessage());
         }
     }
 
     @Override
     public boolean add(Question question) {
-        try {
-            PreparedStatement preparedStatement = connection.prepareStatement(SAVE);
+        try (PreparedStatement preparedStatement = ConnectionService.getConnection().prepareStatement(SAVE)){
             preparedStatement.setString(1, question.getText());
+            preparedStatement.setInt(2, question.getTopic_id());
             return preparedStatement.execute();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+        } catch (SQLException ex) {
+            throw new AddException("Add question error!" + ex.getMessage());
         }
     }
 
     @Override
     public Question get(int id) {
-
-        try {
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(GET);
+        try (PreparedStatement preparedStatement = ConnectionService.getConnection().prepareStatement(GET)){
+            preparedStatement.setInt(1, id);
+            preparedStatement.execute();
+            ResultSet resultSet = preparedStatement.getResultSet();
             resultSet.next();
             return Question.builder()
                     .text(resultSet.getString("text"))
                     .id(resultSet.getInt("id"))
                     .build();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+        } catch (SQLException ex) {
+            throw new GetException("Get question by id error!" + ex.getMessage());
         }
     }
 
     @Override
     public boolean remove(int id) {
-        try {
-            PreparedStatement preparedStatement = connection.prepareStatement(REMOVE);
+        try (PreparedStatement preparedStatement = ConnectionService.getConnection().prepareStatement(REMOVE)){
             preparedStatement.setInt(1, id);
             return preparedStatement.execute();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+        } catch (SQLException ex) {
+            throw new RemoveException("Remove question by id error!" + ex.getMessage());
         }
     }
 
     @Override
     public int update(Question question) {
-        try {
-            PreparedStatement preparedStatement = connection.prepareStatement(UPDATE);
+        try (PreparedStatement preparedStatement = ConnectionService.getConnection().prepareStatement(UPDATE)){
             preparedStatement.setString(1, question.getText());
             preparedStatement.setInt(2, question.getTopic_id());
             preparedStatement.setInt(3, question.getId());
             return preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+        } catch (SQLException ex) {
+            throw new UpdateException("Update question error!" + ex.getMessage());
         }
     }
 }

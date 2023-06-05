@@ -1,8 +1,8 @@
-package home_work_17.service;
+package home_work_JDBC.service;
 
-import home_works.home_work_17.model.Question;
-import home_works.home_work_17.model.Topic;
-import home_works.home_work_17.service.QuestionService;
+import home_works.home_work_JDBC.model.Question;
+import home_works.home_work_JDBC.model.Topic;
+import home_works.home_work_JDBC.service.QuestionService;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -27,7 +27,7 @@ public class QuestionServiceTest {
     @Test
     public void getQuestionByTopicTest() {
         Topic testTopic = Topic.builder().id(1).name("OOP").build();
-        Question result = questionService.getRandomQuestionByTopic(testTopic);
+        Question result = questionService.getRandomQuestionByTopic(testTopic.getId());
         Assert.assertEquals(result.getTopic_id(), testTopic.getId());
     }
 
